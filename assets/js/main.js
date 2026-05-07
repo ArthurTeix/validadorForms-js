@@ -33,10 +33,14 @@ class ValidateForms {
             if (input.classList.contains('cpf')) {
                 if (!this.validCPF(input)) valid = false
             }
+
+            if (input.classList.contains('usuario')) {
+                if (!this.validUser(input)) valid = false
+            }
         }
     }
 
-    validCPF(input) {
+    validCPF(input) { // reutilizei uma classe já criada anteriormente (validatorCpf.js)
         const cpf = new ValidaCPF(input.value)
 
         if (!cpf.valida()) {
@@ -45,6 +49,23 @@ class ValidateForms {
         }
 
         return true
+    }
+
+    validUser(input){
+        const user = input.value
+        let valid = true
+
+        if (user.length < 3 || user.length > 12){ // usando o length do valor para definir restrição
+            this.createError(input, 'Nome de usuário precisa conter entre 3 a 12 caracteres.')
+            valid = false
+        }
+
+        if (!user.match(/^[a-zA-Z0-9]+$/g)){ // usando expressões regulares para permitir apenas letras e números
+            this.createError(input, 'Nome de usuário precisa conter apenas letras e/ou números.')
+            valid = false
+        }
+
+        return valid
     }
 
     createError(input, msg) {
