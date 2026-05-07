@@ -34,8 +34,12 @@ class ValidateForms {
                 if (!this.validCPF(input)) valid = false
             }
 
-            if (input.classList.contains('usuario')) {
+            if (input.classList.contains('user')) {
                 if (!this.validUser(input)) valid = false
+            }
+
+            if (input.classList.contains('password')) {
+                if (!this.validPassword(input)) valid = false
             }
         }
     }
@@ -51,7 +55,7 @@ class ValidateForms {
         return true
     }
 
-    validUser(input){
+    validUser(input) {
         const user = input.value
         let valid = true
 
@@ -66,6 +70,17 @@ class ValidateForms {
         }
 
         return valid
+    }
+
+    validPassword(input) {
+        const password = input.value
+
+        if (password.length < 6 || password.length > 12) {
+            this.createError(input, 'A senha deve conter entre 6 e 12 caracteres.')
+            return false
+        }
+
+        return true 
     }
 
     createError(input, msg) {
