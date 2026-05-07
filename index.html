@@ -12,8 +12,36 @@
 <body>
 
   <section class="container">
-    <h1></h1>
+    <h1>Formulário de cadastro</h1>
+
+    <ul>
+      <li>Nenhum campo pode estar vazio</li>
+      <li>Nome de usuário só pode conter letras e/ou números</li>
+      <li>Nome de usuário deverá ter entre 3 a 12 caracteres</li>
+      <li>Senha deverá ter entre 6 a 12 caracteres</li>
+    </ul>
+
+    <form action="/" method="POST" class="form-main">
+      <label>Name</label>
+    <input type="text" class="name validate">
     
+    <label>Last Name</label>
+    <input type="text" class="last-name validate">
+    
+    <label>CPF</label>
+    <input type="text" class="cpf validate">
+    
+    <label>User</label>
+    <input type="text" class="user validate">
+    
+    <label>Password</label>
+    <input type="text" class="password validate">
+    
+    <label>Password repeat</label>
+    <input type="text" class="password-repeat validate">
+
+    <button type="submit">Submit</button>
+    </form>
   </section>
 
   <script src="./assets/js/main.js"></script>
