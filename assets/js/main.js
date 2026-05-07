@@ -13,11 +13,17 @@ class ValidateForms {
     handleSubmit(e) {
         e.preventDefault()
         const inputValids = this.isValid()
+        const samePasswords = this.samePasswords()
+
+        if (inputValids && samePasswords) {
+            alert("Formulário enviado! Totalmente válido.")
+            this.form.submit()
+        }
     }
 
     isValid() {
         let valid = true
-
+        
         for (let errorText of this.form.querySelectorAll('.error-text')) { // Para limpar os campos com erros ao enviar, para não empilhar erros
             errorText.remove()
         }
@@ -42,6 +48,24 @@ class ValidateForms {
                 if (!this.validPassword(input)) valid = false
             }
         }
+
+        return valid
+    }
+
+    samePasswords() {
+        let valid = true 
+
+        const password = this.form.querySelector('.password')
+        const repeatPassword = this.form.querySelector('.repeat-password')
+
+        if (password.value !== repeatPassword.value) {
+            this.createError(password, "Campo 'Senha' e 'Repetir Senha' precisam ser iguais.")
+            this.createError(repeatPassword, "Campo 'Senha' e 'Repetir Senha' precisam ser iguais.")
+
+            valid = false
+        }
+
+        return valid
     }
 
     validCPF(input) { // reutilizei uma classe já criada anteriormente (validatorCpf.js)
